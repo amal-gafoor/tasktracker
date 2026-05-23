@@ -51,7 +51,7 @@ def get_completed_by_range(db:Session,range:str):
     if range not in range_map:
         raise HTTPException(status_code=404, detail="invalid range")
     
-    cutoff = datetime.utcnow() - timedelta(day=range_map[range])
+    cutoff = datetime.utcnow() - timedelta(days=range_map[range])
 
     tasks = db.query(Task).filter(and_(
         Task.completed == True,
