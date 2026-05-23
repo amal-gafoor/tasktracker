@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field, ConfigDict
+from datetime import datetime
 from typing import Optional
 class CreateTask(BaseModel):
     title: str = Field(...,min_length=1,max_length=30)
@@ -14,8 +15,8 @@ class TaskResponse(BaseModel):
     id: int
     title: str
     completed: bool
-    created_at: str
-    completed_at: Optional[str]
+    created_at: datetime
+    completed_at: Optional[datetime]
 
 class CompleteTaskResponse(BaseModel):
    range:str
