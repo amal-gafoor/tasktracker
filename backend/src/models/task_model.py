@@ -1,24 +1,11 @@
-from pydantic import BaseModel, Field
-from typing import Optional
-class CreateTask(BaseModel):
-    title: str = Field(...,min_length=1,max_length=30)
+from src.config.database import base
+from sqlalchemy import Column,String,Integer,DateTime,Boolean,func
 
+class Task(base):
+    __tablename__ = "task"
 
-class TaskUpdate(BaseModel):
-    title: Optional[str]
-    completed: Optional[bool] = None
-
-class TaskResponse(BaseModel):
-    id: int
-    title: str
-    completed: bool
-    created_at: str
-    completed_at: Optional[str]
-
-    class Config:
-        from_attribute = True
-
-class CompleteTaskResponse(BaseModel):
-   range:str
-   total:int
-   tasks: list[TaskResponse]
+    id = Column(Integer, primary_key=True , index=True)
+    title = Column(String, nullable=False)
+    completed = Column(Boolean, default=False, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    completed_at = Column(DateTime(timezone=True), nullable=True)
