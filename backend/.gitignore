@@ -1,4 +1,12 @@
 .venv
 docker-compose.yml
-Dockerfile
 __pycache__/
+tests/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/ 
+venv/
+ENV/    
+Dockerfile
